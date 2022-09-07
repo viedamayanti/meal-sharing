@@ -33,7 +33,7 @@ app.get('/future-meals', async (req, res) => {
     res.json(rows);
   } catch (e) {
     console.error(e);
-    res.status(400).json({ error: 'Internal server error' });
+    res.status(400).json({ error: 'Internal server error ' });
   }
 });
 app.get('/past-meals', async (req, res) => {
