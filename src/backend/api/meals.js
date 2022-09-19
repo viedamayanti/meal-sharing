@@ -2,27 +2,18 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../database');
 
-router.get('/', async (request, response) => {
-  try {
-    // knex syntax for selecting things. Look up the documentation for knex for further info
-    const titles = await knex('meals').select('title');
-    response.json(titles);
-  } catch (error) {
-    throw error;
-  }
-});
-router.get('/future-meals', async (req, res) => {
-  const result = await knex.raw(
-    `SELECT * FROM meal ORDER BY created_date DESC `
-  );
+//let mealsQuery = knex('meals')
+router.get('/', async (req, res) => {
+  const result = await knex.raw(`SELECT * FROM meal`);
   return res.json({
     meals: result[0],
   });
 });
-router.get('/past-meals', async (req, res) => {
-  const result = await knex.raw(`SELECT * FROM meal ORDER BY created_date ASC`);
+
+router.post('/', async (req, res) => {
+  const result = await knex('meals').insert(req.body);
   return res.json({
-    meals: result[0],
+    msg: 'meals created',
   });
 });
 
