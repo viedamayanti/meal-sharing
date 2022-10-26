@@ -37,6 +37,21 @@ router.get('/past-meals', async (req, res) => {
   } catch {
     res.status(500).json({ Msg: 'Internal server error' });
   }
+=======
+//let mealsQuery = knex('meals')
+router.get('/', async (req, res) => {
+  const result = await knex.raw(`SELECT * FROM meal`);
+  return res.json({
+    meals: result[0],
+  });
+});
+
+router.post('/', async (req, res) => {
+  const result = await knex('meals').insert(req.body);
+  return res.json({
+    msg: 'meals created',
+  });
+
 });
 
 router.get('/all-meals', async (req, res) => {
