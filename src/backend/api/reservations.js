@@ -30,6 +30,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+
+//Update without hardcore
 router.put('/:id', async (req, res) => {
   try {
     const paramsValue = req.params.id;
@@ -42,6 +44,9 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+
+//Does not work
+
 router.delete('/:id', async (req, res) => {
   try {
     const paramsValue = req.params.id;
@@ -51,6 +56,7 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ Msg: 'Internal server error' });
   }
 });
+
 
 //availableReservations
 router.get('/', async (req, res) => {
