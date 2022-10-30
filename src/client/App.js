@@ -6,9 +6,11 @@ import Home from './components/TestComponent/Home';
 function App() {
   return (
     <Router>
-      <Route exact path='/'></Route>
+      <Route exact path='/'>
+        <h1>home</h1>
+      </Route>
       <Route exact path='/lol'>
-        <Home />
+        <h1> lol</h1>
       </Route>
       <Route exact path='/test-component'>
         <TestComponent></TestComponent>
