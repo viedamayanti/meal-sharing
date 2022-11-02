@@ -7,7 +7,7 @@ function App() {
   return (
     <Router>
       <Route exact path='/'>
-        <h1>home</h1>
+        <Home />
       </Route>
       <Route exact path='/lol'>
         <h1> lol</h1>

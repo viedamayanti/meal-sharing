@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 require('dotenv').config();
 const express = require('express');
 const app = express();
@@ -9,15 +11,11 @@ const mealsRouter = require('./api/meals');
 const reservationRouter = require('./api/reservations');
 const reviewRouter = require('./api/review');
 
-
-const reservationRouter = require('./api/reservations');
-
 const buildPath = path.join(__dirname, '../../dist');
 const port = process.env.PORT || 5000;
 
-//const reservationRouter = require('./api/reservations');
-const buildPath = path.join(__dirname, '../dist');
-const port = process.env.PORT || 3000;
+// const buildPath = path.join(__dirname, '../dist');
+// const port = process.env.PORT || 3000;
 
 const cors = require('cors');
 const knex = require('./database');
@@ -33,7 +31,7 @@ app.use(express.json());
 app.use(cors());
 
 router.use('/meals', mealsRouter);
-//router.use('/reservations', reservationRouter);
+router.use('/reservations', reservationRouter);
 app.get('/my-route', (req, res) => {
   res.send('Hi friend');
 });
@@ -48,14 +46,24 @@ if (process.env.API_PATH) {
   throw 'API_PATH is not set. Remember to set it in your .env file';
 }
 
-
-
-app.listen(port, () => console.log(`Server started on port ${port}`));
-
-
 // for the frontend. Will first be covered in the react class
 app.use('*', (req, res) => {
   res.sendFile(path.join(`${buildPath}/index.html`));
 });
 
 module.exports = app;
+/*
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+//import TestComponent from "./components/TestComponent/TestComponent";
+​
+function App() {
+  return (
+    <Routes>
+      
+      <Route exact path="/meals" element={<TestComponent />} /> 
+    </Routes>
+  );
+}
+​
+export default App;*/

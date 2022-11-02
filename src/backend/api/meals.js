@@ -4,7 +4,6 @@ const router = express.Router();
 const knex = require('../database');
 
 router.get('/', async (req, res) => {
-
   let query = knex('meal');
   if ('maxPrice' in req.query) {
     query = query.where('price', '<', Number(req.query.maxPrice));
@@ -43,27 +42,29 @@ router.get('/', async (req, res) => {
       query = query.orderBy(req.query.sort_key, 'asc');
     }
   }
-  try {
-    const mealsRecord = await query;
-    res.json(mealsRecord);
-
+  // try
+  // {
+  //   const mealsRecord = await query;
+  //   res.json( mealsRecord );
+  // }
   try {
     const result = await knex.raw(`SELECT * FROM meal`);
     res.json({
       meals: result[0],
     });
-
   } catch (error) {
     res.status(500).json({ Msg: 'Internal server error' });
   }
 });
-
 
 router.post('/', async (req, res) => {
   try {
     const result = await knex.insert(req.body).into('meal');
     res.json(`ID number ${result} is created`);
   } catch (error) {
+    res.status(500).json({ Msg: 'Internal server error' });
+  }
+});
 
 router.get('/future-meals', async (req, res) => {
   try {
@@ -74,11 +75,9 @@ router.get('/future-meals', async (req, res) => {
       meals: result[0],
     });
   } catch {
-  
     res.status(500).json({ Msg: 'Internal server error' });
   }
 });
-
 
 router.get('/:id', async (req, res) => {
   try {
@@ -114,7 +113,7 @@ router.put('/:id', async (req, res) => {
     res.status(500).json({ Msg: 'Internal server error' });
   }
 });
-=======
+
 router.get('/past-meals', async (req, res) => {
   try {
     const result = await knex.raw(
@@ -126,7 +125,8 @@ router.get('/past-meals', async (req, res) => {
   } catch {
     res.status(500).json({ Msg: 'Internal server error' });
   }
-=======
+});
+
 //let mealsQuery = knex('meals')
 router.get('/', async (req, res) => {
   const result = await knex.raw(`SELECT * FROM meal`);
@@ -140,7 +140,6 @@ router.post('/', async (req, res) => {
   return res.json({
     msg: 'meals created',
   });
-
 });
 
 router.get('/all-meals', async (req, res) => {
@@ -207,7 +206,6 @@ router.put('/:id', async (req, res) => {
     res.status(500).json({ Msg: 'Internal server error' });
   }
 });
-
 
 router.delete('/:id', async (req, res) => {
   try {
