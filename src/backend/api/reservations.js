@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const result = await knex.insert(req.body).into('reservation');
-    res.status(201).send('Created');
+    res.json({ message: `Reservation ${result} created` });
   } catch (error) {
     res.status(500).json({ Msg: 'Internal server error' });
   }
@@ -30,8 +30,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-
-//Update without hardcore
 router.put('/:id', async (req, res) => {
   try {
     const paramsValue = req.params.id;
@@ -44,9 +42,6 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-
-//Does not work
-
 router.delete('/:id', async (req, res) => {
   try {
     const paramsValue = req.params.id;
@@ -56,7 +51,6 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ Msg: 'Internal server error' });
   }
 });
-
 
 //availableReservations
 router.get('/', async (req, res) => {
