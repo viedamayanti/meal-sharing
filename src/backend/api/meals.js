@@ -42,11 +42,7 @@ router.get('/', async (req, res) => {
       query = query.orderBy(req.query.sort_key, 'asc');
     }
   }
-  // try
-  // {
-  //   const mealsRecord = await query;
-  //   res.json( mealsRecord );
-  // }
+
   try {
     const result = await knex.raw(`SELECT * FROM meal`);
     res.json({
@@ -60,8 +56,10 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const result = await knex.insert(req.body).into('meal');
+    console.log(result);
     res.json(`ID number ${result} is created`);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ Msg: 'Internal server error' });
   }
 });

@@ -26,10 +26,10 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        test: /\.(png|woff|woff2|eot|ttf|svg|jpg)$/,
         use: {
           loader: 'url-loader',
-          options: { limit: 100000 },
+          options: { limit: 100000000 },
         },
       },
     ],
@@ -40,6 +40,7 @@ module.exports = {
   devServer: {
     static: './',
     historyApiFallback: true,
+    // @ts-ignore
     port: parseInt(process.env.CLIENT_PORT, 10),
     open: process.env.OPEN_BROWSER === 'true' ? true : false,
     proxy: {

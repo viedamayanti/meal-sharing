@@ -1,21 +1,15 @@
-// @ts-nocheck
-
-require('dotenv').config();
 const express = require('express');
 const app = express();
 const router = express.Router();
 const path = require('path');
 
 const mealsRouter = require('./api/meals');
-
 const reservationRouter = require('./api/reservations');
 const reviewRouter = require('./api/review');
 
 const buildPath = path.join(__dirname, '../../dist');
-const port = process.env.PORT || 5000;
-
-// const buildPath = path.join(__dirname, '../dist');
-// const port = process.env.PORT || 3000;
+const port = process.env.API_PORT || 5000;
+console.log(port);
 
 const cors = require('cors');
 const knex = require('./database');
@@ -32,13 +26,11 @@ app.use(cors());
 
 router.use('/meals', mealsRouter);
 router.use('/reservations', reservationRouter);
+router.use('/review', reviewRouter);
+
 app.get('/my-route', (req, res) => {
   res.send('Hi friend');
 });
-
-router.use('/reservations', reservationRouter);
-
-router.use('/review', reviewRouter);
 
 if (process.env.API_PATH) {
   app.use(process.env.API_PATH, router);
@@ -52,18 +44,3 @@ app.use('*', (req, res) => {
 });
 
 module.exports = app;
-/*
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-//import TestComponent from "./components/TestComponent/TestComponent";
-​
-function App() {
-  return (
-    <Routes>
-      
-      <Route exact path="/meals" element={<TestComponent />} /> 
-    </Routes>
-  );
-}
-​
-export default App;*/

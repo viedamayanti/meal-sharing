@@ -1,21 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import TestComponent from './components/TestComponent/TestComponent';
-import Home from './components/TestComponent/Home';
+import Navbar from './components/header/Navbar';
+import Routes from './components/header/Routes';
+import Footer from './components/footer/Footer';
 
 function App() {
   return (
-    <Router>
-      <Route exact path='/'>
-        <Home />
-      </Route>
-      <Route exact path='/lol'>
-        <h1> lol</h1>
-      </Route>
-      <Route exact path='/test-component'>
-        <TestComponent></TestComponent>
-      </Route>
-    </Router>
+    <div className='App'>
+      <Navbar />
+      <Routes />
+      <Footer />
+    </div>
   );
 }
 
